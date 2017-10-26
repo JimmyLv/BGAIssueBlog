@@ -1,8 +1,8 @@
 {
-  "name": "bga-issue-blog",
+  "name": "issue-blog",
   "version": "1.0.0",
-  "description": "BGAIssueBlog",
-  "author": "bingoogolapple <bingoogolapple@gmail.com>",
+  "description": "JimmyLv's GitHub issues as blog",
+  "author": "JimmyLv <jimmy.jinglv@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
