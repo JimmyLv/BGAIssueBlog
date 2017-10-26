@@ -28,16 +28,16 @@
 
 > 列表界面
 
-![列表界面](https://user-images.githubusercontent.com/8949716/28500665-bb40926a-6ffe-11e7-852f-14261f93e56a.png)
+![列表界面](https://user-images.githubusercontent.com/8949716/29306642-28079ec8-81d1-11e7-959f-4da1e0dc488a.png)
 
 > 详情界面
 
-![详情界面](https://user-images.githubusercontent.com/8949716/28500675-ef9ef9b6-6ffe-11e7-95af-d7d259985a3f.png)
-![详情界面-滚动到顶部和评论](https://user-images.githubusercontent.com/8949716/28500690-360dd502-6fff-11e7-9b54-71e423a6cd46.png)
+![详情界面](https://user-images.githubusercontent.com/8949716/29306679-4bb2d824-81d1-11e7-9e9b-d792f17aaf89.png)
+![详情界面-滚动到顶部和评论](https://user-images.githubusercontent.com/8949716/29306736-809e28c2-81d1-11e7-8252-8526a3baedbd.png)
 
 > 关于我界面
 
-![关于我界面](https://user-images.githubusercontent.com/8949716/28500705-8179d8ce-6fff-11e7-9519-2a1d9973f33c.png)
+![关于我界面](https://user-images.githubusercontent.com/8949716/29306836-d88c4c12-81d1-11e7-80c6-d461c05abeca.png)
 
 ## 使用方法
 
@@ -53,38 +53,49 @@ npm install
 ```
 npm run dev
 ```
-> 3.个人配置 - 修改「BGAIssueBlog/src/store/account.js」文件中的「state」属性
+> 3.[创建 OAuth Application](https://github.com/settings/applications/new)
+
+![OAuth Application](https://user-images.githubusercontent.com/8949716/29244726-34983f0c-7ff2-11e7-98a7-6435b419c8dd.png)
+> 4.个人配置 - 修改「BGAIssueBlog/src/store/account.js」文件中的「state」属性
 
 ```JavaScript
 const state = {
-  gitHubUser: null,  // 这个不要修改，这个不要修改，这个不要修改
+  accessToken: localStorage.getItem(LS_KEY_ACCESS_TOKEN),  // 这个不要修改，这个不要修改，这个不要修改。当前登录用户的 GitHub AccessToken
+  auth: {
+    proxy: 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token', // 这个不要修改，这个不要修改，这个不要修改。
+    clientID: '8fe09ec96875938b908d',   // 改成你在 https://github.com/settings/applications/new 新建的 OAuth application 的 Client ID
+    clientSecret: '46df51ccde6f3499c3b90861bba660fb1bcf15e4'  // 改成你在 https://github.com/settings/applications/new 新建的 OAuth application 的 Client Secret
+  },
+  gitHubUser: null,  // 这个不要修改，这个不要修改，这个不要修改。
   gitHubUsername: 'bingoogolapple',  // 修改成你自己的 GitHub 账号
+  copyright: '2014 - 2017',  // 修改成你自己的
+  recordNumber: '蜀ICP备17023604号',  // 修改成你自己的备案编号，如果没有备案的话就设置为 null
   repo: 'bingoogolapple/bingoogolapple.github.io',  // 记录 Issue 的仓库的全名「用户名/仓库名」
   pageSize: 10,  // 博客列表每页显示多少条博客
-  showQQGroup: true,  // 如果要显示你自己的 QQ 群二维码图片的话这里配置成 true 并且替换「BGAIssueBlog/static/img/qq-group.png」为你自己的 QQ 群二维码图片，否则配置成 false 即可
+  showQQGroup: true,  // 如果要显示你自己的 QQ 群二维码图片的话这里配置成 true 并且替换「BGAIssueBlog-Web/static/img/qq-group.png」为你自己的 QQ 群二维码图片，否则配置成 false 即可
   thirdPartySite: [  // 配置你想在左上角展示的第三方站点信息
     {
-      img: '/static/img/github.png',  // 第三方站点图标，存放在「BGAIssueBlog/static/img」目录中
+      img: 'static/img/github.png',  // 第三方站点图标，存放在「BGAIssueBlog-Web/static/img」目录中
       url: 'https://github.com/bingoogolapple'  // 第三方站点的 url
     },
     {
-      img: '/static/img/weibo.png',
+      img: 'static/img/weibo.png',
       url: 'http://weibo.com/bingoogol'
     },
     {
-      img: '/static/img/git.png',
+      img: 'static/img/git.png',
       url: 'https://bingoogolapple.gitbooks.io/bgalearningnotes-git/content'
     }
     // 如果还有其他站点需要显示，继续在这里追加
   ]
 }
 ```
-> 4.个人配置 - 修改网站图标
+> 5.个人配置 - 修改网站图标
 
 ```
 修改「BGAIssueBlog/static/img/favicon.ico」文件
 ```
-> 5.个人配置 - 修改网站标题
+> 6.个人配置 - 修改网站标题
 
 ```
 修改「BGAIssueBlog/index.html」文件里「<title>」标签里的内容

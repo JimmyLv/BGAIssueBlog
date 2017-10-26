@@ -12,10 +12,10 @@
              class="back-icon">返回
       </span>
     </div>
-    <div class="comment-container bga-back-top">
+    <div class="comment-container bga-back-top" ref="commentContainer">
       <comment :comment="issue"/>
       <comment v-for="comment in comments" :key="comment.id" :comment="comment"/>
-      <div @click="remark" class="remark">评论</div>
+      <add-comment :commentsUrl="issue.comments_url" @addCommentSuccess="handleAddCommentSuccess"/>
     </div>
   </div>
 </template>
@@ -69,37 +69,22 @@
     overflow-y: auto;
     padding: 0px 50px;
   }
-
-  .remark {
-    cursor: pointer;
-    user-select: none;
-    margin: 30px 0px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #eff7ff;
-    color: #3593f2;
-    &:hover {
-      background-color: #3593f2;
-      color: #ffffff;
-    }
-  }
 </style>
 <script>
   import { mapActions } from 'vuex'
   import Comment from '../components/Comment.vue'
+  import AddComment from '../components/AddComment.vue'
 
   export default{
     data () {
       return {
         issue: null,
         number: null,
-        comments: []
+        comments: [],
+        newComment: null
       }
     },
-    components: {Comment},
+    components: {Comment, AddComment},
     methods: {
       ...mapActions([
         'updateActiveLabel'
@@ -124,8 +109,15 @@
       back () {
         this.$router.go(-1)
       },
-      remark () {
-        window.open(this.issue.html_url)
+      handleAddCommentSuccess (comment) {
+        this.comments.push(comment)
+        this.$nextTick(() => {
+          // 如果这里不加个 setTimeout 的话，Comment 数量太多时不会自动滚动到底部
+          setTimeout(() => {
+            let commentContainer = this.$refs.commentContainer
+            commentContainer.scrollTop = commentContainer.scrollHeight - commentContainer.clientHeight
+          }, 16)
+        })
       }
     },
     created () {
